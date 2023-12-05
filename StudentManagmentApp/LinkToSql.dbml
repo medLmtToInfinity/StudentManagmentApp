@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SMA_db" Class="LinkToSqlDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-7O1MGHI\SQLEXPRESS;Initial Catalog=SMA_db;Integrated Security=True;Trust Server Certificate=True" SettingsObjectName="StudentManagmentApp.Properties.Settings" SettingsPropertyName="SMA_dbConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Etudiants" Member="Etudiants">
+    <Type Name="Etudiant">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="cne" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nom" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="prenom" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="sexe" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="date_naiss" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="adress" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="telephone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="id_filiere" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="id_level" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Filiere_Etudiant" Member="Filiere" ThisKey="id_filiere" OtherKey="id" Type="Filiere" IsForeignKey="true" />
+      <Association Name="Level_Etudiant" Member="Level" ThisKey="id_level" OtherKey="id" Type="Level" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Filieres" Member="Filieres">
+    <Type Name="Filiere">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nom_filiere" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Filiere_Etudiant" Member="Etudiants" ThisKey="id" OtherKey="id_filiere" Type="Etudiant" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Level]" Member="Levels">
+    <Type Name="Level">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="Level_Etudiant" Member="Etudiants" ThisKey="id" OtherKey="id_level" Type="Etudiant" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="login" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="admin" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
